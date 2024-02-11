@@ -44,7 +44,7 @@ const canIRotate = ref(true)
 onLoop(({ delta, elapsed, clock }) => {
   if (!canIRotate.value) return
 
-  moon.rotation.y = orbitalSpeeds[moon.name] * elapsed
+  moon.rotation.y = -orbitalSpeeds[moon.name] * elapsed
   earthGroup.rotation.y = -orbitalSpeeds[earth.name] * elapsed
   saturnGroup.rotation.y = -orbitalSpeeds[saturn.name] * elapsed
   neptune.rotation.z = orbitalSpeeds[neptune.name] * elapsed

@@ -26,9 +26,9 @@ const orbitalSpeeds: OrbitalSpeeds = {
   Earth_Icosphere: 60 / 107.244,
   Mars_Icosphere002: 60 / 86.868,
   Jupiter_Icosphere006: 60 / 47.016,
-  Saturn_Icosphere007: 60 / 34.705,
-  uranus_Icosphere009: 60 / 24.516,
-  Neptune_Icosphere010: 60 / 19.548,
+  Saturn_Icosphere007: 60 / 34.705 / 2,
+  uranus_Icosphere009: 60 / 24.516 / 2,
+  Neptune_Icosphere010: 60 / 19.548 / 2,
   Moon_Icosphere001: 60 / 13.37
 }
 
