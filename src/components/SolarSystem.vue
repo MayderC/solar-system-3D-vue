@@ -7,7 +7,8 @@
 import { useLoader, useRenderLoop } from '@tresjs/core'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
-import { SOLAR_S } from '../Three/constants'
+import { SOLAR_S, orbitalSpeeds } from '../Three/constants'
+import { ref } from 'vue'
 
 console.log('SolarSystem.vue')
 console.log('useLoader', useLoader)
@@ -38,17 +39,20 @@ const saturnGroup = new THREE.Group()
 saturnGroup.add(saturn, saturnRing)
 earthGroup.add(earth, moon)
 
+const canIRotate = ref(true)
+
 onLoop(({ delta, elapsed, clock }) => {
-  moon.rotation.y = elapsed * 2
-  earth.rotation.y = elapsed * 1
-  earthGroup.rotation.y = elapsed * 0.5
-  saturnGroup.rotation.y = elapsed * 0.7
-  neptune.rotation.z = -elapsed * 1
-  uranus.rotation.z = -elapsed * 1
-  mars.rotation.z = -elapsed * 1
-  mercury.rotation.z = -elapsed * 1
-  venus.rotation.z = -elapsed * 1
-  jupiter.rotation.z = -elapsed * 0.2
+  if (!canIRotate.value) return
+
+  moon.rotation.y = orbitalSpeeds[moon.name] * elapsed
+  earthGroup.rotation.y = -orbitalSpeeds[earth.name] * elapsed
+  saturnGroup.rotation.y = -orbitalSpeeds[saturn.name] * elapsed
+  neptune.rotation.z = orbitalSpeeds[neptune.name] * elapsed
+  uranus.rotation.z = orbitalSpeeds[uranus.name] * elapsed
+  mars.rotation.z = orbitalSpeeds[mars.name] * elapsed
+  mercury.rotation.z = orbitalSpeeds[mercury.name] * elapsed
+  venus.rotation.z = orbitalSpeeds[venus.name] * elapsed
+  jupiter.rotation.z = orbitalSpeeds[jupiter.name] * elapsed
 })
 
 glb.scene.add(earthGroup, saturnGroup)

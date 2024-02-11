@@ -32,7 +32,6 @@ onLoop(({ delta, elapsed, clock }) => {
     </Suspense>
     <OrbitControls />
     <TresPointLight :position="[0, 0, 0]" :intensity="5" />
-
     <TresAxesHelper :size="100" />
   </TresCanvas>
 </template>

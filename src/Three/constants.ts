@@ -1,4 +1,8 @@
-export const SOLAR_S = {
+type planets = {
+  [key: string]: string
+}
+
+const SOLAR_S: planets = {
   Earth_Icosphere: 'Earth_Icosphere',
   Moon_Icosphere001: 'Moon_Icosphere001',
   Venus_Icosphere004: 'Venus_Icosphere004',
@@ -12,3 +16,20 @@ export const SOLAR_S = {
   Saturn_Icosphere007: 'Saturn_Icosphere007',
   Space: 'Space'
 }
+type OrbitalSpeeds = {
+  [key: string]: number
+}
+
+const orbitalSpeeds: OrbitalSpeeds = {
+  Mercury_Icosphere005: 60 / 172.404,
+  Venus_Icosphere004: 60 / 126.108,
+  Earth_Icosphere: 60 / 107.244,
+  Mars_Icosphere002: 60 / 86.868,
+  Jupiter_Icosphere006: 60 / 47.016,
+  Saturn_Icosphere007: 60 / 34.705,
+  uranus_Icosphere009: 60 / 24.516,
+  Neptune_Icosphere010: 60 / 19.548,
+  Moon_Icosphere001: 60 / 13.37
+}
+
+export { orbitalSpeeds, SOLAR_S }
