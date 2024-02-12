@@ -4,23 +4,49 @@
   </Suspense>
 </template>
 <script lang="ts" setup>
-import { useLoader, useRenderLoop } from '@tresjs/core'
-import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
-import { SOLAR_S, orbitalSpeeds } from '../Three/constants'
-import { ref } from 'vue'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { useLoader, useRenderLoop, useTresContext } from '@tresjs/core'
+import { SOLAR_S, orbitalSpeeds } from '../../Three/constants'
+import { ref, defineEmits } from 'vue'
+import * as THREE from 'three'
 
-console.log('SolarSystem.vue')
-console.log('useLoader', useLoader)
-console.log('GLTFLoader', GLTFLoader)
+const emitter = defineEmits(['onLoaded'])
+const { camera, renderer, scene } = useTresContext()
 
-const glb = await useLoader(GLTFLoader, '/spacev2.glb')
+const glb = await useLoader(GLTFLoader, '/space-origin.glb')
 
 glb.scene.position.set(0, 0, 0)
+glb.scene.scale.set(0.7, 0.7, 0.7)
 
-glb.scene.scale.set(0.5, 0.5, 0.5)
+const postprocessing = () => {
+  const renderPass = new RenderPass(scene.value, camera.value!)
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.5,
+    0.4,
+    0.85
+  )
 
-const { onLoop, resume } = useRenderLoop()
+  bloomPass.threshold = 0
+  bloomPass.strength = 1
+  bloomPass.radius = 0
+  bloomPass.renderToScreen = true
+
+  const composer = new EffectComposer(renderer.value)
+  composer.setSize(window.innerWidth, window.innerHeight)
+  composer.addPass(renderPass)
+  composer.addPass(bloomPass)
+  renderer.value.toneMappingExposure = Math.pow(0.9, 4.0)
+
+  return composer
+}
+
+const composer = postprocessing()
+
+const { onLoop, pause, resume } = useRenderLoop()
 
 const earth = glb.scene.getObjectByName(SOLAR_S.Earth_Icosphere) as THREE.Mesh
 const moon = glb.scene.getObjectByName(SOLAR_S.Moon_Icosphere001) as THREE.Mesh
@@ -39,10 +65,11 @@ const saturnGroup = new THREE.Group()
 saturnGroup.add(saturn, saturnRing)
 earthGroup.add(earth, moon)
 
-const canIRotate = ref(true)
+const canIRotate = ref(false)
 
-onLoop(({ delta, elapsed, clock }) => {
-  if (!canIRotate.value) return
+onLoop(({ elapsed }) => {
+  //composer.render()
+  if (canIRotate.value == false) return
 
   moon.rotation.y = -orbitalSpeeds[moon.name] * elapsed
   earthGroup.rotation.y = -orbitalSpeeds[earth.name] * elapsed
@@ -55,5 +82,8 @@ onLoop(({ delta, elapsed, clock }) => {
   jupiter.rotation.z = orbitalSpeeds[jupiter.name] * elapsed
 })
 
-glb.scene.add(earthGroup, saturnGroup)
+glb.scene.add(earthGroup)
+glb.scene.add(saturnGroup)
+
+emitter('onLoaded', { scene: glb.scene, camera: camera.value! })
 </script>
