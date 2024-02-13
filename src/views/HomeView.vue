@@ -5,6 +5,7 @@ import SolarSystem from '@/components/SolarSystem/SolarSystem.vue'
 import { ref } from 'vue'
 import { gsap } from 'gsap'
 import { SOLAR_S } from '../Three/constants'
+import { updateCameraPosition } from '../Three/UpdateCameraPosition'
 
 interface EmitArgs {
   scene: THREE.Group
@@ -61,12 +62,10 @@ const scrollRotate = () => {
     }
 
     if (scrollPercent * 40 >= 20) {
-      gsap.to(tresCamera.value?.position!, {
+      updateCameraPosition(tresCamera.value!, {
         x: 7.573818683624268,
         y: 20,
-        z: -4.696861743927002,
-        duration: 1,
-        ease: 'power4.out'
+        z: -4.696861743927002
       })
     }
 
