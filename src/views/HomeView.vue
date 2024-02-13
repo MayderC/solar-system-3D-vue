@@ -182,14 +182,14 @@ const scrollRotate = () => {
     if (scrollPercent * 40 == 100) {
       //neptune
       gsap.to(tresCamera.value?.position!, {
-        y: 75,
+        y: 115,
         duration: 0.5,
         ease: 'power4.out'
       })
 
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2 - 0.064,
-        y: -12.555,
+        x: Math.PI / 2 - 0.0477,
+        y: -12.52,
         duration: 2,
         ease: 'power4.out'
       })
