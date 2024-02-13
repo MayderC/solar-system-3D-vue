@@ -6,4 +6,10 @@ import { RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+</style>

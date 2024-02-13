@@ -90,7 +90,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 22) {
+    if (scrollPercent * 40 == 20) {
       const mercury = glbScene.value!.getObjectByName(SOLAR_S.Mercury_Icosphere005) as THREE.Mesh
       gsap.to(tresCamera.value?.position!, {
         x: mercury.position.x,
@@ -107,7 +107,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 33) {
+    if (scrollPercent * 40 == 30) {
       //venus
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.09,
@@ -123,7 +123,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 44) {
+    if (scrollPercent * 40 == 40) {
       //earth
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.1,
@@ -133,7 +133,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 55) {
+    if (scrollPercent * 40 == 50) {
       //mars
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.15,
@@ -149,7 +149,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 66) {
+    if (scrollPercent * 40 == 60) {
       //jupiter
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.095,
@@ -159,7 +159,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 77) {
+    if (scrollPercent * 40 == 70) {
       //saturn
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.1,
@@ -169,7 +169,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 88) {
+    if (scrollPercent * 40 == 80) {
       //uranus
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.093,
@@ -179,10 +179,10 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 == 100) {
+    if (scrollPercent * 40 == 90) {
       //neptune
       gsap.to(tresCamera.value?.position!, {
-        y: 115,
+        y: 120,
         duration: 0.5,
         ease: 'power4.out'
       })
@@ -195,7 +195,21 @@ const scrollRotate = () => {
       })
     }
 
-    console.log(scrollPercent * 40)
+    if (scrollPercent * 40 == 100) {
+      //outro
+      gsap.to(tresCamera.value?.position!, {
+        y: 0,
+        duration: 0.5,
+        ease: 'power4.out'
+      })
+
+      gsap.to(glbScene.value!.rotation, {
+        x: Math.PI / 2 - 0.1,
+        y: -13.5,
+        duration: 2,
+        ease: 'power4.out'
+      })
+    }
   })
 }
 </script>
@@ -290,9 +304,36 @@ const scrollRotate = () => {
       the fourth-largest planet by diameter.
     </p>
   </section>
+
+  <section class="thanks">
+    <h1>Thanks for watching</h1>
+    <p>
+      Developed by <a href="https://github.com/MayderC" target="_blank">MayderC</a> using
+      <a href="https://threejs.org/" target="_blank">Three.js</a> and
+      <a href="https://vuejs.org/" target="_blank">Vue.js</a>, special thanks to
+      <a href="https://www.cgtrader.com/designers/onomatopoeia" target="_blank">Onomatopoeia</a> for
+      the 3D models
+    </p>
+  </section>
 </template>
 
 <style>
+.thanks {
+  color: white;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.thanks a {
+  color: #00bfff;
+}
+
 html,
 body {
   margin: 0;
@@ -310,7 +351,7 @@ section {
   scroll-snap-align: start;
   position: relative;
   z-index: 1;
-
+  padding: 10px;
   color: white;
   text-align: center;
   font-family: 'Roboto', sans-serif;
