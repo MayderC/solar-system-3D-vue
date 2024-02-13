@@ -94,39 +94,39 @@ const scrollRotate = () => {
       const mercury = glbScene.value!.getObjectByName(SOLAR_S.Mercury_Icosphere005) as THREE.Mesh
       gsap.to(tresCamera.value?.position!, {
         x: mercury.position.x,
-        y: 50,
+        y: 20,
         z: mercury.position.z,
         duration: 0.5,
-        ease: 'power4.out',
-        onComplete: () => {
-          gsap.to(lookAt.value!, {
-            x: 0,
-            y: 0,
-            z: 0,
-            duration: 0.5,
-            ease: 'power4.out',
-            onComplete: () => {
-              tresCamera.value!.updateProjectionMatrix()
-            }
-          })
-        }
+        ease: 'power4.out'
       })
-    }
-
-    if (scrollPercent * 40 == 33) {
-      const venus = glbScene.value!.getObjectByName(SOLAR_S.Venus_Icosphere005) as THREE.Mesh
-
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2,
-        y: -0.5,
+        x: 1.37,
+        y: 0.67,
         duration: 2,
         ease: 'power4.out'
       })
     }
 
-    if (scrollPercent * 40 == 44) {
+    if (scrollPercent * 40 == 33) {
+      //venus
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2,
+        x: Math.PI / 2 - 0.09,
+        y: -0.57,
+        duration: 2,
+        ease: 'power4.out'
+      })
+
+      gsap.to(tresCamera.value?.position!, {
+        y: 45,
+        duration: 0.5,
+        ease: 'power4.out'
+      })
+    }
+
+    if (scrollPercent * 40 == 44) {
+      //earth
+      gsap.to(glbScene.value!.rotation, {
+        x: Math.PI / 2 - 0.1,
         y: -3.5,
         duration: 2,
         ease: 'power4.out'
@@ -134,17 +134,25 @@ const scrollRotate = () => {
     }
 
     if (scrollPercent * 40 == 55) {
+      //mars
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2 - 0.05,
-        y: -5.6,
+        x: Math.PI / 2 - 0.15,
+        y: -5.72,
         duration: 2,
+        ease: 'power4.out'
+      })
+
+      gsap.to(tresCamera.value?.position!, {
+        y: 30,
+        duration: 0.5,
         ease: 'power4.out'
       })
     }
 
     if (scrollPercent * 40 == 66) {
+      //jupiter
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2 - 0.1,
+        x: Math.PI / 2 - 0.095,
         y: -7.94,
         duration: 2,
         ease: 'power4.out'
@@ -152,8 +160,7 @@ const scrollRotate = () => {
     }
 
     if (scrollPercent * 40 == 77) {
-      const saturn = glbScene.value!.getObjectByName(SOLAR_S.Saturn_Icosphere005) as THREE.Mesh
-
+      //saturn
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2 - 0.1,
         y: -9.02,
@@ -163,8 +170,9 @@ const scrollRotate = () => {
     }
 
     if (scrollPercent * 40 == 88) {
+      //uranus
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2 - 0.1,
+        x: Math.PI / 2 - 0.093,
         y: -10.7,
         duration: 2,
         ease: 'power4.out'
@@ -172,9 +180,16 @@ const scrollRotate = () => {
     }
 
     if (scrollPercent * 40 == 100) {
+      //neptune
+      gsap.to(tresCamera.value?.position!, {
+        y: 75,
+        duration: 0.5,
+        ease: 'power4.out'
+      })
+
       gsap.to(glbScene.value!.rotation, {
-        x: Math.PI / 2 - 0.01,
-        y: -12.6,
+        x: Math.PI / 2 - 0.064,
+        y: -12.555,
         duration: 2,
         ease: 'power4.out'
       })
