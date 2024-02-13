@@ -31,7 +31,7 @@ const scrollRotate = () => {
       Math.floor((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) / 40
     const rotationValue = (scrollPercent * 360) / 100
 
-    if (scrollPercent * 40 < 22) {
+    if (scrollPercent * 40 < 20) {
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI * 2,
         y: rotationValue,
@@ -60,7 +60,7 @@ const scrollRotate = () => {
       })
     }
 
-    if (scrollPercent * 40 >= 22) {
+    if (scrollPercent * 40 >= 20) {
       gsap.to(glbScene.value!.rotation, {
         x: Math.PI / 2,
         y: 1,
