@@ -23,16 +23,25 @@ const onLoaded = ({ scene, camera }: EmitArgs) => {
   glbScene.value = scene
   tresCamera.value = camera
 
-  const scrollPercent =
-    Math.floor((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) / 40
-  const rotationValue = (scrollPercent * 360) / 100
+  let scrollPercent = Math.floor(
+    (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+  )
 
   scrollRotate()
-  rotations(scrollPercent, rotationValue)
+  rotations(scrollPercent)
 }
 
-const rotations = (scrollPercent: number, rotationValue: number) => {
-  if (scrollPercent * 40 <= 0 && scrollPercent * 40 < 10) {
+const rotations = (scrollPercent: number) => {
+  if (window.innerWidth < 768) {
+    console.log('mobile')
+    console.log(scrollPercent)
+    scrollPercent += 10
+    console.log(scrollPercent)
+
+    console.log(scrollPercent * 40)
+  }
+
+  if (scrollPercent <= 0 && scrollPercent < 10) {
     gsap.to(glbScene.value!.rotation, {
       z: 0,
       //rotate 45 degrees
@@ -52,7 +61,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 10 && scrollPercent * 40 < 20) {
+  if (scrollPercent >= 10 && scrollPercent < 20) {
     gsap.to(glbScene.value!.rotation, {
       z: 0,
       y: (Math.PI * 150) / 180,
@@ -73,7 +82,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 20 && scrollPercent * 40 < 30) {
+  if (scrollPercent >= 20 && scrollPercent < 30) {
     gsap.to(glbScene.value!.rotation, {
       z: (Math.PI * 45) / 180,
       y: (Math.PI * 238) / 180,
@@ -94,7 +103,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 30 && scrollPercent * 40 < 40) {
+  if (scrollPercent >= 30 && scrollPercent < 40) {
     updateCameraPosition(tresCamera.value!, {
       x: 0,
       y: 0,
@@ -112,7 +121,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 40 && scrollPercent * 40 < 50) {
+  if (scrollPercent >= 40 && scrollPercent < 50) {
     //earth
     updateCameraPosition(tresCamera.value!, {
       x: 0,
@@ -131,7 +140,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 50 && scrollPercent * 40 < 60) {
+  if (scrollPercent >= 50 && scrollPercent < 60) {
     updateCameraPosition(tresCamera.value!, {
       x: 0,
       y: 0,
@@ -149,7 +158,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 60 && scrollPercent * 40 < 70) {
+  if (scrollPercent >= 60 && scrollPercent < 70) {
     updateCameraPosition(tresCamera.value!, {
       x: 0,
       y: 0,
@@ -167,7 +176,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 70 && scrollPercent * 40 < 80) {
+  if (scrollPercent >= 70 && scrollPercent < 80) {
     //saturn
     updateCameraPosition(tresCamera.value!, {
       x: 0,
@@ -186,7 +195,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 80 && scrollPercent * 40 < 90) {
+  if (scrollPercent >= 80 && scrollPercent < 90) {
     //uranus
     updateCameraPosition(tresCamera.value!, {
       x: 0,
@@ -205,7 +214,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 >= 90 && scrollPercent * 40 < 100) {
+  if (scrollPercent >= 90 && scrollPercent < 100) {
     //neptune
     updateCameraPosition(tresCamera.value!, {
       x: 0,
@@ -224,7 +233,7 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 === 100) {
+  if (scrollPercent === 100) {
     //outro
     updateCameraPosition(tresCamera.value!, {
       x: 0,
@@ -246,10 +255,11 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
 
 const scrollRotate = () => {
   window.addEventListener('scroll', () => {
-    const scrollPercent =
-      Math.floor((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) / 40
-    const rotationValue = (scrollPercent * 360) / 100
-    rotations(scrollPercent, rotationValue)
+    const scrollPercent = Math.floor(
+      (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+    )
+
+    rotations(scrollPercent)
   })
 }
 </script>
