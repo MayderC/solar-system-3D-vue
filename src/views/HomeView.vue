@@ -4,7 +4,6 @@ import { Stars } from '@tresjs/cientos'
 import SolarSystem from '@/components/SolarSystem/SolarSystem.vue'
 import { ref } from 'vue'
 import { gsap } from 'gsap'
-import { SOLAR_S } from '../Three/constants'
 import { updateCameraPosition } from '../Three/UpdateCameraPosition'
 
 interface EmitArgs {
@@ -33,10 +32,12 @@ const onLoaded = ({ scene, camera }: EmitArgs) => {
 }
 
 const rotations = (scrollPercent: number, rotationValue: number) => {
-  if (scrollPercent * 40 < 20) {
+  if (scrollPercent * 40 <= 0 && scrollPercent * 40 < 10) {
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI * 2,
-      y: rotationValue,
+      z: 0,
+      //rotate 45 degrees
+      y: 1,
+      x: 0,
       duration: 2,
       ease: 'power4.out'
     })
@@ -51,18 +52,20 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 20 && scrollPercent * 40 < 30) {
+  if (scrollPercent * 40 >= 10 && scrollPercent * 40 < 20) {
     gsap.to(glbScene.value!.rotation, {
-      x: 1.37,
-      y: 0.67,
+      z: 0,
+      y: (Math.PI * 150) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
 
     gsap.to(tresCamera.value?.position!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002,
+      x: 0,
+      y: 0,
+      z: 40,
       duration: 2,
       ease: 'power4.out'
     })
@@ -70,43 +73,57 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 30 && scrollPercent * 40 < 40) {
+  if (scrollPercent * 40 >= 20 && scrollPercent * 40 < 30) {
+    gsap.to(glbScene.value!.rotation, {
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 238) / 180,
+      x: 0,
+      order: 'ZYX',
+      duration: 2,
+      ease: 'power4.out'
+    })
+
+    gsap.to(tresCamera.value?.position!, {
+      x: 0,
+      y: 0,
+      z: 40,
+      duration: 2,
+      ease: 'power4.out'
+    })
+
+    return
+  }
+
+  if (scrollPercent * 40 >= 30 && scrollPercent * 40 < 40) {
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 40
     })
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.09,
-      y: -0.57,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 157) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
-    gsap.to(tresCamera.value?.position!, {
-      y: 45,
-      duration: 2,
-      ease: 'power4.out'
-    })
+
     return
   }
 
-  if (scrollPercent * 40 <= 40 && scrollPercent * 40 < 50) {
+  if (scrollPercent * 40 >= 40 && scrollPercent * 40 < 50) {
     //earth
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 40
     })
-
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.1,
-      y: -3.5,
-      duration: 2,
-      ease: 'power4.out'
-    })
-
-    gsap.to(tresCamera.value?.position!, {
-      y: 50,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 348) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -114,20 +131,17 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 50 && scrollPercent * 40 < 60) {
+  if (scrollPercent * 40 >= 50 && scrollPercent * 40 < 60) {
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 40
     })
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.15,
-      y: -5.72,
-      duration: 2,
-      ease: 'power4.out'
-    })
-    gsap.to(tresCamera.value?.position!, {
-      y: 30,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 226) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -135,20 +149,17 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 60 && scrollPercent * 40 < 70) {
+  if (scrollPercent * 40 >= 60 && scrollPercent * 40 < 70) {
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 60
     })
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.095,
-      y: -7.94,
-      duration: 2,
-      ease: 'power4.out'
-    })
-    gsap.to(tresCamera.value?.position!, {
-      y: 50,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 93.7) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -156,23 +167,18 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 70 && scrollPercent * 40 < 80) {
+  if (scrollPercent * 40 >= 70 && scrollPercent * 40 < 80) {
     //saturn
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 75
     })
-    console.log(' <= 70 && < 80')
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.1,
-      y: -9.02,
-      duration: 2,
-      ease: 'power4.out'
-    })
-
-    gsap.to(tresCamera.value?.position!, {
-      y: 50,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * 32) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -180,23 +186,18 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 80 && scrollPercent * 40 < 90) {
+  if (scrollPercent * 40 >= 80 && scrollPercent * 40 < 90) {
     //uranus
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 75
     })
-    console.log(' <= 80 && < 90')
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.093,
-      y: -10.7,
-      duration: 2,
-      ease: 'power4.out'
-    })
-
-    gsap.to(tresCamera.value?.position!, {
-      y: 50,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * -64.5) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -204,23 +205,18 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
     return
   }
 
-  if (scrollPercent * 40 <= 90 && scrollPercent * 40 < 100) {
+  if (scrollPercent * 40 >= 90 && scrollPercent * 40 < 100) {
     //neptune
     updateCameraPosition(tresCamera.value!, {
-      x: 7.573818683624268,
-      y: 20,
-      z: -4.696861743927002
+      x: 0,
+      y: 0,
+      z: 75
     })
-    console.log(' <= 90 && < 100')
-    gsap.to(tresCamera.value?.position!, {
-      y: 120,
-      duration: 2,
-      ease: 'power4.out'
-    })
-
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.0477,
-      y: -12.52,
+      z: (Math.PI * 45) / 180,
+      y: (Math.PI * -173.5) / 180,
+      x: 0,
+      order: 'ZYX',
       duration: 2,
       ease: 'power4.out'
     })
@@ -230,17 +226,17 @@ const rotations = (scrollPercent: number, rotationValue: number) => {
 
   if (scrollPercent * 40 === 100) {
     //outro
-    console.log(' === 100')
-    gsap.to(tresCamera.value?.position!, {
+    updateCameraPosition(tresCamera.value!, {
+      x: 0,
       y: 0,
-      duration: 2,
-      ease: 'power4.out'
+      z: 75
     })
-
     gsap.to(glbScene.value!.rotation, {
-      x: Math.PI / 2 - 0.1,
-      y: -13.5,
-      duration: 2,
+      z: (Math.PI * 0) / 180,
+      y: (Math.PI * 660) / 180,
+      x: 0,
+      order: 'ZYX',
+      duration: 10,
       ease: 'power4.out'
     })
 
